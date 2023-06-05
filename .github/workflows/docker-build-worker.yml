@@ -19,7 +19,7 @@ on:
 
 env:
   REGISTRY: pinoched
-  
+
 jobs:
   
   build-worker:
@@ -44,7 +44,11 @@ jobs:
             password: ${{ secrets.DOCKER_PASSWORD }}
       - 
         name: Set VERSION
-        run: echo "GITHUB_SHA_SHORT=$(git rev-parse --short '$GITHUB_SHA')" >> $GITHUB_ENV
+        run: echo "GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c 1-6)" >> $GITHUB_ENV
+
+      - 
+        name: Test VERSION
+        run: echo ${{ env.GITHUB_SHA_SHORT }}
 
       - 
         name: Build and push result image
@@ -54,5 +58,7 @@ jobs:
           context: worker
           platforms: linux/amd64
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/worker:${{ env.GITHUB_SHA_SHORT }} , ${{ secrets.DOCKER_HUB_USERNAME }}/worker:latest
+          tags: |
+            ${{ secrets.DOCKER_HUB_USERNAME }}/worker:${{ env.GITHUB_SHA_SHORT }}
+            ${{ secrets.DOCKER_HUB_USERNAME }}/worker:latest
         
