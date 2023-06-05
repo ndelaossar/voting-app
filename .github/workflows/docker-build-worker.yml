@@ -52,8 +52,5 @@ jobs:
           context: worker
           platforms: linux/amd64
           push: true
-          tags:
-            - "${{ env.VERSION }}"
-            - "latest"
-      
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/worker:${{ env.VERSION }} , ${{ secrets.DOCKER_HUB_USERNAME }}/worker:latest
         
