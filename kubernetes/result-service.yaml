@@ -18,7 +18,7 @@ spec:
         - image: pinoched/result:TAG
           name: result
           ports:
-            - containerPort: 80
+            - containerPort: 3000
               name: result
 ---
 apiVersion: v1
@@ -32,7 +32,7 @@ spec:
   ports:
     - name: "result-service"
       port: 5001
-      targetPort: 80
+      targetPort: 3000
       nodePort: 31001
   selector:
     app: result
