@@ -110,9 +110,11 @@ jobs:
       cluster: "test-cluster"
       namespaces: "ndelaossa"
     steps:
-        - 
-          name: Check out the repo
+        - name: Check out the repo
           uses: actions/checkout@v3
+        
+        - name: Set VERSION
+          run: echo "GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c 1-6)" >> $GITHUB_ENV
 
         - name: Configure AWS Credentials Action For GitHub Actions
           uses: aws-actions/configure-aws-credentials@v1
