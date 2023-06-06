@@ -141,17 +141,17 @@ jobs:
         - name: UPDATE IMAGE VOTE
           run: |
             cd kubernetes
-            sed -i "s/TAG/$SHORT_SHA/g" vote-service.yaml
+            sed -i "s/TAG/$GITHUB_SHA_SHORT/g" vote-service.yaml
             cat vote-service.yaml
         - name: UPDATE IMAGE RESULT
           run: |
             cd kubernetes
-            sed -i "s/TAG/$SHORT_SHA/g" result-service.yaml
+            sed -i "s/TAG/$GITHUB_SHA_SHORT/g" result-service.yaml
             cat result-service.yaml          
         - name: UPDATE IMAGE WORKER
           run: |
             cd kubernetes
-            sed -i "s/TAG/$SHORT_SHA/g" worker-deployment.yaml
+            sed -i "s/TAG/$GITHUB_SHA_SHORT/g" worker-deployment.yaml
             cat worker-deployment.yaml  
 
         - name: DEPLOY 
